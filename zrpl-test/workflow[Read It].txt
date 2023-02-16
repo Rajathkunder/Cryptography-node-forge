@@ -1,28 +1,34 @@
 				DETAILED WORKFLOW
 				---------------------------------
-1. *In the file api-key-gen.js first of all we are importing necessary packages like node-forge which contain all cryptographic utilities,
-      next is file system module for reading or writing files, and atlast path module.
+1.  *In the file api-key-gen.js first of all we are importing necessary packages like node-forge which contain all cryptographic utilities,
+     next is file system module for reading or writing files, and atlast path module.
     *Next we will  generate a new RSA key pair using the Forge library, in this case it will generate a 2048-bit key.
-      The private key is then extracted from the key pair and converted to PEM format using the forge.pki.privateKeyToPem() method.
-       In the same way  the public key is extracted from the key pair and converted to PEM format using the forge.pki.publicKeyToPem() method.
-     *Next we will specify the directory or path where we need to store that key,also we write all contents ie keys to a seperate html file ie key-gen.html.
+     The private key is then extracted from the key pair and converted to PEM format using the forge.pki.privateKeyToPem() method.
+     In the same way  the public key is extracted from the key pair and converted to PEM format using the forge.pki.publicKeyToPem() method.
+    *Next we will specify the directory or path where we need to store that key,also we write all contents ie keys to a seperate html file ie key-gen.html.
+    
 2.  *The key-gen.html file contains the private as well as public key.
+
 3.  *In encrypt.js file we are actually encrypting the uer-input using public key, so we are reading the public key from key-gen.html file , 
-       we use regex inorder to exactly read the public key .The forge.pki.publicKeyFromPem function then parses the PEM-encoded public key and returns a PublicKey object.
-      *Next the publicKey.encrypt(input, 'RSA-OAEP') method encrypts the input string using the RSA-OAEP algorithm with the public key.
-        then we will write that encrypted text to result.html file with base64 encoding.
-4.   *In decrypt.js file we are taking the private key from key-gen.html file and encrypted text from result.html file and then we decrypting it.
-      *In this the forge.pki.privateKeyFromPem function then parses the PEM-encoded privte key and returns a Privatekey object, also we willl read and store the encrypted text from result.html file.
-      *we will use the forge.util.decode64() function to decode the message from base64 encoding.
-      *And then we will decrypt the message using private and RSA-OAEP algorithm.
+       we use regex inorder to exactly read the public key .The forge.pki.publicKeyFromPem function then parses the PEM-encoded public key and returns a PublicKey              object.
+    *Next the publicKey.encrypt(input, 'RSA-OAEP') method encrypts the input string using the RSA-OAEP algorithm with the public key.
+       then we will write that encrypted text to result.html file with base64 encoding.
+       
+4.  *In decrypt.js file we are taking the private key from key-gen.html file and encrypted text from result.html file and then we decrypting it.
+    *In this the forge.pki.privateKeyFromPem function then parses the PEM-encoded privte key and returns a Privatekey object, also we willl read and store the               encrypted  text from result.html file.
+    *we will use the forge.util.decode64() function to decode the message from base64 encoding.
+    *And then we will decrypt the message using private and RSA-OAEP algorithm.
 
 				HOW TO RUN
 				-------------------
-step1: First of all you need node.js dev env
-step2: Install  Cryptographic utilities like 'node-forge' also install 'fs' and 'path' modules.
-step3:Run command "node api-key-gen.js" , you can see a key-gen.html file is generated in key-pair directory;
-step4: Once you have private and public key , Try to encrypt some string ie Run command "node encrypt.js sample-text"[Here sample-text is commandline argument].
-          you can see a result.html file is generated with some encrypted text.
-step5:Finally , Inorder to decrypt this encrypted text Run command "node decrypt.js" , you can observe the output ie input text.
+step1:   First of all you need node.js dev env
+
+step2:   Install  Cryptographic utilities like 'node-forge' also install 'fs' and 'path' modules.
+step3:   Run command "node api-key-gen.js" , you can see a key-gen.html file is generated in key-pair directory;
+
+step4:   Once you have private and public key , Try to encrypt some string ie Run command "node encrypt.js sample-text"[Here sample-text is commandline argument].
+         you can see a result.html file is generated with some encrypted text.
+	 
+step5:   Finally , Inorder to decrypt this encrypted text Run command "node decrypt.js" , you can observe the output ie input text.
 
 
